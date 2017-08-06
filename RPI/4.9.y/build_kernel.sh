@@ -20,4 +20,7 @@ cp -rf /linux/arch/arm64/boot/Image /output/RPIROOT/boot/kernel8.img
 cp -rf /linux/arch/arm64/boot/dts/broadcom/bcm2710-rpi-3-b.dtb /output/RPIROOT/boot/
 cp -rf /linux/arch/arm/boot/dts/overlays /output/RPIROOT/boot/overlays
 
+rm -rf /output/RPIROOT/boot/overlays/.*.tmp
+rm -rf /output/RPIROOT/boot/overlays/.*.cmd
+
 cd /output/RPIROOT && tar -cvzf kernel64-4.9.40.tar.gz *
