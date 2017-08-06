@@ -11,8 +11,13 @@ make -j${JOBS} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- bcmrpi3_defconfig
 make -j${JOBS} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LOCALVERSION="-arm64" Image
 make -j${JOBS} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LOCALVERSION="-arm64" dtbs
 make -j${JOBS} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LOCALVERSION="-arm64" modules
-make -j ${JOBS} INSTALL_MOD_PATH=/tmp/modules ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- modules_install
-( mv /tmp/modules /output/modules || true )
 
-cp -rf /linux/arch/arm64/boot /output/arm64-boot
-cp -rf /linux/arch/arm/boot /output/arm-boot
+
+mkdir -p /output/RPIROOT/boot
+make -j ${JOBS} INSTALL_MOD_PATH=/output/RPIROOT ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- modules_install
+
+cp -rf /linux/arch/arm64/boot/Image /output/RPIROOT/boot/kernel8.img
+cp -rf /linux/arch/arm64/boot/dts/broadcom/bcm2710-rpi-3-b.dtb /output/RPIROOT/boot/
+cp -rf /linux/arch/arm/boot/dts/overlays /output/RPIROOT/boot/overlays
+
+cd /output/RPIROOT && tar -cvzf kernel64-4.9.40.tar.gz *
