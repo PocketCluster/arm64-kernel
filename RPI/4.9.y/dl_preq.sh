@@ -54,5 +54,7 @@ if [[ ${PATCH_KERNEL_AUFS} -eq 1 ]];then
     popd
 fi
 
+# apply pre-configured config (aufs + vxlan support)
+cp rpi_config linux/.config
 
 #git clone --depth=1 -b master https://github.com/raspberrypi/firmware

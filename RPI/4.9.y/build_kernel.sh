@@ -6,8 +6,34 @@ export JOBS=$(nproc)
 	
 cd /linux 
 
-make -j${JOBS} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- bcmrpi3_defconfig
-# make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- menuconfig
+if [[ ! -f .config ]]; then
+
+	make -j${JOBS} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- bcmrpi3_defconfig
+	# make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- menuconfig
+	: <<'EXTRA_CFG_ADDED'
+CONFIG_AUFS_FS=y
+# CONFIG_AUFS_BRANCH_MAX_127 is not set
+# CONFIG_AUFS_BRANCH_MAX_511 is not set
+# CONFIG_AUFS_BRANCH_MAX_1023 is not set
+CONFIG_AUFS_BRANCH_MAX_32767=y
+CONFIG_AUFS_SBILIST=y
+# CONFIG_AUFS_HNOTIFY is not set
+# CONFIG_AUFS_EXPORT is not set
+CONFIG_AUFS_XATTR=y
+# CONFIG_AUFS_FHSM is not set
+# CONFIG_AUFS_RDU is not set
+# CONFIG_AUFS_SHWH is not set
+# CONFIG_AUFS_BR_RAMFS is not set
+# CONFIG_AUFS_BR_FUSE is not set
+CONFIG_AUFS_BR_HFSPLUS=y
+CONFIG_AUFS_BDEV_LOOP=y
+# CONFIG_AUFS_DEBUG is not set
+
+CONFIG_VXLAN=y
+EXTRA_CFG_ADDED
+
+fi 
+
 make -j${JOBS} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LOCALVERSION="-arm64" Image
 make -j${JOBS} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LOCALVERSION="-arm64" dtbs
 make -j${JOBS} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LOCALVERSION="-arm64" modules
