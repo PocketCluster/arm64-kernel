@@ -48,5 +48,6 @@ cp -rf /linux/arch/arm/boot/dts/overlays /output/RPIROOT/boot/overlays
 
 rm -rf /output/RPIROOT/boot/overlays/.*.tmp
 rm -rf /output/RPIROOT/boot/overlays/.*.cmd
+rm -rf /output/RPIROOT/boot/overlays/*.dts
 
 cd /output/RPIROOT && tar -cvzf kernel64-4.9.40.tar.gz *
