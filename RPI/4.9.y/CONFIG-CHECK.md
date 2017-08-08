@@ -12,6 +12,7 @@ Generally Necessary:
 - CONFIG_NET_NS: enabled
 - CONFIG_PID_NS: enabled
 - CONFIG_IPC_NS: enabled
+- 
 - CONFIG_UTS_NS: enabled
 - CONFIG_CGROUPS: enabled
 - CONFIG_CGROUP_CPUACCT: enabled
@@ -194,3 +195,5 @@ Optional Features:
 Limits:
 - /proc/sys/kernel/keys/root_maxkeys: 1000000
 ```
+
+- CONFIG_DEVPTS_MULTIPLE_INSTANCES : [What is stored in /dev/pts files and can we open them?](https://unix.stackexchange.com/questions/93531/what-is-stored-in-dev-pts-files-and-can-we-open-them#93640)
