@@ -1,8 +1,8 @@
 # TODO
 
 - [ ] `config.txt`
-- [ ] `cmdline.txt`
-- [ ] missing module files
+- [x] `cmdline.txt`
+- [x] missing module files (run `depmod` within a host that runs the kernel)
   - modules.alias
   - modules.alias.bin  
   - ~~modules.builtin~~  
