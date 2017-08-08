@@ -83,6 +83,7 @@ make -j ${JOBS} INSTALL_MOD_PATH=/output/RPIROOT ARCH=arm64 CROSS_COMPILE=aarch6
 
 cp -rf /linux/arch/arm64/boot/Image /output/RPIROOT/boot/kernel8.img
 cp -rf /linux/arch/arm64/boot/dts/broadcom/bcm2710-rpi-3-b.dtb /output/RPIROOT/boot/
+cp -rf /linux/arch/arm64/boot/dts/broadcom/bcm2837-rpi-3-b.dtb /output/RPIROOT/boot/
 cp -rf /linux/arch/arm/boot/dts/overlays /output/RPIROOT/boot/overlays
 
 rm -rf /output/RPIROOT/boot/overlays/.*.tmp
