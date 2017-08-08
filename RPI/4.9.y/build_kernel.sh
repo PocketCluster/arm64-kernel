@@ -91,3 +91,6 @@ rm -rf /output/RPIROOT/boot/overlays/.*.cmd
 rm -rf /output/RPIROOT/boot/overlays/*.dts
 
 cd /output/RPIROOT && tar -cvzf kernel64-4.9.40.tar.gz *
+
+echo "lib/modules/4.9.40-v8-arm64/modules.* files need to generated from an actually booted host with 'depmod' command!!!"
+echo "lib/modules/4.9.40-v8-arm64/modules.* files should then be copied and rebuild archive file!!!"
