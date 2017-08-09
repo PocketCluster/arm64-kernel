@@ -90,6 +90,21 @@ rm -rf /output/RPIROOT/boot/overlays/.*.tmp
 rm -rf /output/RPIROOT/boot/overlays/.*.cmd
 rm -rf /output/RPIROOT/boot/overlays/*.dts
 
+# Remove useless kernel modules
+rm -rf /output/RPIROOT/lib/modules/*/kernel/sound/*
+rm -rf /output/RPIROOT/lib/modules/*/kernel/drivers/gpu/*
+rm -rf /output/RPIROOT/lib/modules/*/kernel/drivers/infiniband/*
+rm -rf /output/RPIROOT/lib/modules/*/kernel/drivers/isdn/*
+rm -rf /output/RPIROOT/lib/modules/*/kernel/drivers/media/*
+rm -rf /output/RPIROOT/lib/modules/*/kernel/drivers/staging/lustre/*
+rm -rf /output/RPIROOT/lib/modules/*/kernel/drivers/staging/comedi/*
+rm -rf /output/RPIROOT/lib/modules/*/kernel/drivers/net/wireless/*
+rm -rf /output/RPIROOT/lib/modules/*/kernel/drivers/bluetooth/*
+rm -rf /output/RPIROOT/lib/modules/*/kernel/fs/ocfs2/*
+rm -rf /output/RPIROOT/lib/modules/*/kernel/net/bluetooth/*
+rm -rf /output/RPIROOT/lib/modules/*/kernel/net/mac80211/*
+rm -rf /output/RPIROOT/lib/modules/*/kernel/net/wireless/*
+
 cd /output/RPIROOT && tar -cvzf kernel64-4.9.40.tar.gz *
 
 echo "lib/modules/4.9.40-v8-arm64/modules.* files need to generated from an actually booted host with 'depmod' command!!!"
