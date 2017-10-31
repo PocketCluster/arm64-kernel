@@ -14,4 +14,4 @@
   - modules.softdep  
   - modules.symbols  
   - modules.symbols.bin
-  
+- [ ] **make sure 64bit firmware is freshly compiled and installed together with modules**.
