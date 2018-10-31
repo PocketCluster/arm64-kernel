@@ -16,10 +16,11 @@ make -j${JOBS} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LOCALVERSION="-arm64"
 make -j${JOBS} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LOCALVERSION="-arm64" dtbs
 make -j${JOBS} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LOCALVERSION="-arm64" modules
 
+make -j${JOBS} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LOCALVERSION="-arm64" modules_install INSTALL_MOD_PATH=/output/C2
+make -j${JOBS} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LOCALVERSION="-arm64" headers_install INSTALL_HDR_PATH=/output/C2
+make -j${JOBS} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LOCALVERSION="-arm64" source_install INSTALL_HDR_PATH=/output/C2
 
 mkdir -p /output/C2/boot
-make -j${JOBS} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LOCALVERSION="-arm64" modules_install INSTALL_MOD_PATH=/output/C2 ARCH=arm64 
-
 cp -rf /linux/arch/arm64/boot/Image /output/C2/boot/
 cp -rf /linux/arch/arm64/boot/dts/meson64_odroidc2.dtb /output/C2/boot/
 

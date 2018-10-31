@@ -48,4 +48,38 @@ These are selectable easily via menuconfig, if CONFIG_NET and CONFIG_INET are al
         [*]   IP: WireGuard secure network tunnel
         [ ]     Debugging checks and verbose messages
         [*] The IPv6 protocol (as Wireguard is dependent)
-````
+```
+
+# Install Kernel
+
+```
+tar xzf kernel64-3.16.60.tar.gz -C kernel64-3.16.60
+cp -rf kernel64-3.16.60/boot/* /boot
+rm -rf /lib/firmware && cp -rf kernel64-3.16.60/lib/firmware /lib/
+rm -rf /lib/modules/3.16.60-arm64 && cp -rf kernel64-3.16.60/lib/modules/3.16.60-arm64 /lib/modules
+rm -rf /usr/src/linux-headers-3.16.60-arm64 && cp -rf kernel64-3.16.60/include /usr/src/linux-headers-3.16.60-arm64
+rm /lib/modules/3.16.60-arm64/build && ln -s /usr/src/linux-headers-3.16.60-arm64 /lib/modules/3.16.60-arm64/build
+```
+
+# Install WireGuard Tools
+(installing WireGuard doesn't require linux header or source)
+
+```
+apt-get -y install libmnl-dev libelf-dev build-essential pkg-config kmod
+
+wget https://git.zx2c4.com/WireGuard/snapshot/WireGuard-0.0.20181018.tar.xz 
+tar xf WireGuard-0.0.20181018.tar.xz 
+cd WireGuard-0.0.20181018/src
+```
+
+comment out following line in `MakeFile`
+```make
+install:
+# @$(MAKE) -C $(KERNELDIR) M=$(PWD) modules_install
+  depmod -a
+  @$(MAKE) -C tools install
+```
+
+```
+make tools && make install (as root)
+```
