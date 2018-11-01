@@ -57,7 +57,9 @@ echo "Done - boot files in $DEST"
 make -j${JOBS} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LOCALVERSION= modules
 make -j${JOBS} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- modules_install INSTALL_MOD_PATH="$DEST"
 make -j${JOBS} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- firmware_install INSTALL_MOD_PATH="$DEST"
-make -j${JOBS} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LOCALVERSION="-arm64" headers_install INSTALL_HDR_PATH="$DEST"
+make -j${JOBS} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LOCALVERSION= headers_install INSTALL_HDR_PATH="$DEST"
+
+make -j${JOBS} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LOCALVERSION= deb-pkg KBUILD_IMAGE=arch/arm64/boot/Image
 
 # Fix symbolic links
 rm -f "$DEST/lib/modules/$VERSION/source"
