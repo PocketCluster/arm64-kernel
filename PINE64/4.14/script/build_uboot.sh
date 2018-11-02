@@ -9,7 +9,7 @@ cd ${FIRMWARE}
 
 make clean 
 make -j${JOBS} PLAT=sun50i_a64 DEBUG=0 bl31
-export BL31=/arm-trusted-firmware/build/sun50i_a64/release/bl31.bin
+export BL31=${FIRMWARE}/build/sun50i_a64/release/bl31.bin
 
 echo "===== Building U-Boot ====="
 cp -fv ${CONFIG}/uboot.config ${UBOOT}/.config && cd ${UBOOT}
