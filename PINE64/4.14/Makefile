@@ -41,4 +41,7 @@ uboot:
 		-v ${PWD}/components/u-boot:/u-boot \
 		pine64-compile bash /script/build_uboot.sh
 
+bootstrap:
+	tar cvzf boostrap.tar.gz output
+
 #.PHONY: build
