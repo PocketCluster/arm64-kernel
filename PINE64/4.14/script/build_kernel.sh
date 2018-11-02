@@ -30,6 +30,8 @@ mkdir -p "${INSTALL_PATH}/boot/dtb"
 # copy Kernel
 cp -vf "${LINUX}/arch/arm64/boot/Image" "${INSTALL_PATH}/boot"
 echo "${VERSION}" > "${INSTALL_PATH}/boot/Image.version"
+cp -vf "${LINUX}/System.map ${INSTALL_PATH}/boot"
+cp -vf "${LINUX}/.config ${INSTALL_PATH}/boot/config"
 
 # copy binary device tree
 if [ -d "${LINUX}/arch/arm64/boot/dts/allwinner" ]; then
