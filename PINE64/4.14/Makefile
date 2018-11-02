@@ -1,18 +1,44 @@
-build: | output
-	(find . -name ".DS_Store" | xargs rm || true)
-	docker build -t pine64-kernel .
-	cp config/kernel.config components/linux/.config
-	docker run --name pine64-kernel -v ${PWD}/components/linux:/linux -v ${PWD}/output:/output pine64-kernel bash /build_kernel.sh
-	docker rm pine64-kernel
-	cd output && tar cvzf ../pine64-3.10.105.tar.gz *
-
-output:
-	(rm -rf ${PWD}/output || true)
-	mkdir -p $@
-
 clean:
 	rm -rf output
-	docker rm pine64-kernel
-	docker rmi pine64-kernel
+	docker rm pine64-compile
+	docker rmi pine64-compile
 
-.PHONY: build
+output:
+	(find . -name ".DS_Store" | xargs rm || true)
+	mkdir -p $@
+
+docker:
+	docker build -t pine64-compile .
+
+kernel:
+	docker run \
+		--rm \
+		--name pine64-compile \
+		-v ${PWD}/config:/config \
+		-v ${PWD}/script:/script \
+		-v ${PWD}/output:/output \
+		-v ${PWD}/components/linux:/linux \
+		pine64-compile bash /script/build_kernel.sh
+
+busybox:
+	docker run \
+		--rm \
+		--name pine64-compile \
+		-v ${PWD}/config:/config \
+		-v ${PWD}/script:/script \
+		-v ${PWD}/output:/output \
+		-v ${PWD}/components/busybox:/busybox \
+		pine64-compile bash /script/build_busybox.sh
+
+uboot:
+	docker run \
+		--rm \
+		--name pine64-compile \
+		-v ${PWD}/config:/config \
+		-v ${PWD}/script:/script \
+		-v ${PWD}/output:/output \
+		-v ${PWD}/components/arm-trusted-firmware:/arm-trusted-firmware \
+		-v ${PWD}/components/u-boot:/u-boot \
+		pine64-compile bash /script/build_uboot.sh
+
+#.PHONY: build
