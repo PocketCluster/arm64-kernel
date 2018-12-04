@@ -6,7 +6,7 @@ source /script/common.sh
 export SUBFOLDER="kernel"
 export INSTALL_PATH="${DEST}/${SUBFOLDER}"
 
-cp -fv ${CONFIG}/kernel-wireguard.config ${LINUX}/.config && cd ${LINUX} 
+cp -fv ${CONFIG}/kernel-wg-iptable.config ${LINUX}/.config && cd ${LINUX} 
 
 make ${CROSS_COMPILE_FLAG} clean
 
@@ -30,8 +30,8 @@ mkdir -p "${INSTALL_PATH}/boot/dtb"
 # copy Kernel
 cp -vf "${LINUX}/arch/arm64/boot/Image" "${INSTALL_PATH}/boot"
 echo "${VERSION}" > "${INSTALL_PATH}/boot/Image.version"
-cp -vf "${LINUX}/System.map ${INSTALL_PATH}/boot"
-cp -vf "${LINUX}/.config ${INSTALL_PATH}/boot/config"
+cp -vf "${LINUX}/System.map" "${INSTALL_PATH}/boot"
+cp -vf "${LINUX}/.config" "${INSTALL_PATH}/boot/config"
 
 # copy binary device tree
 if [ -d "${LINUX}/arch/arm64/boot/dts/allwinner" ]; then
